@@ -3,7 +3,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
   name: gitea-cicd-system
-  namespace: flux-system
+  namespace: cicd-system
 spec:
   chart:
     spec:
