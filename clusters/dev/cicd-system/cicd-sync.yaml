@@ -1,4 +1,11 @@
 ---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cicd-system
+  labels:
+    istio-injection: enabled
+---
 apiVersion: source.toolkit.fluxcd.io/v1beta1
 kind: GitRepository
 metadata:
@@ -29,4 +36,4 @@ spec:
     provider: sops
     secretRef:
       # Reference the new 'sops-gpg' secret
-      name: sops-gpg 
+      name: sops-gpg
