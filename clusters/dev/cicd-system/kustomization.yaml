@@ -5,3 +5,6 @@ resources:
 - gitea/helm-repository.yaml
 - gitea/secret.yaml
 - gitea/configmap.yaml
+- gitea/certificates.yaml
+- gitea/entrypoint.yaml
+- gitea/helm-release.yaml

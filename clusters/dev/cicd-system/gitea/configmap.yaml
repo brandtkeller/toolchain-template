@@ -42,3 +42,20 @@ data:
         builtIn:
           postgresql:
             enabled: true
+    # additional volumes to add to the Gitea statefulset.
+    extraVolumes:
+    - name: root-ca
+      secret:
+        secretName: root-ca-cert
+    - name: entry
+      configMap:
+        name: git-entry
+        defaultMode: 0777
+    extraVolumeMounts:
+    - name: root-ca
+      readOnly: false
+      mountPath: "/usr/local/share/ca-certificates"
+    - name: entry
+      mountPath: /usr/bin/entrypoint
+      subPath: entrypoint
+  
