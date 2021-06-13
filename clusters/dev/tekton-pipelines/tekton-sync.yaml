@@ -13,11 +13,43 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: tekton
+  name: tekton-pipeline
   namespace: tekton-pipelines
 spec:
   interval: 5m0s
-  path: ./clusters/dev/tekton-pipelines
+  path: ./clusters/dev/tekton-pipelines/pipelines
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: tekton
+  validation: client
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: tekton-trigger
+  namespace: tekton-pipelines
+spec:
+  dependsOn:
+    - name: tekton-pipeline
+  interval: 5m0s
+  path: ./clusters/dev/tekton-pipelines/triggers
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: tekton
+  validation: client
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: tekton-dashboard
+  namespace: tekton-pipelines
+spec:
+  dependsOn:
+    - name: tekton-pipeline
+  interval: 5m0s
+  path: ./clusters/dev/tekton-pipelines/dashboard
   prune: true
   sourceRef:
     kind: GitRepository
