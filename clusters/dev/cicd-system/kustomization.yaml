@@ -8,3 +8,4 @@ resources:
 - gitea/certificates.yaml
 - gitea/entrypoint.yaml
 - gitea/helm-release.yaml
+- tekton/release.yaml
