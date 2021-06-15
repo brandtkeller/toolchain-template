@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tekton-dashboard
+  namespace: tekton-pipelines
+  annotations:
+    cert-manager.io/cluster-issuer: cluster-ca-issuer
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+  - hosts:
+      - tekton.system.rke2.home.local
+    secretName: tekton-tls
+  rules:
+  - host: tekton.system.rke2.home.local
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: tekton-dashboard
+            port:
+              number: 9097

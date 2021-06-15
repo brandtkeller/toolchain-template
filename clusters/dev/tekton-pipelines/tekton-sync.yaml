@@ -33,7 +33,23 @@ spec:
   dependsOn:
     - name: tekton-pipeline
   interval: 5m0s
-  path: ./clusters/dev/tekton-pipelines/triggers
+  path: ./clusters/dev/tekton-pipelines/triggers/trigger
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: tekton
+  validation: client
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: tekton-interceptor
+  namespace: tekton-pipelines
+spec:
+  dependsOn:
+    - name: tekton-trigger
+  interval: 5m0s
+  path: ./clusters/dev/tekton-pipelines/triggers/interceptor
   prune: true
   sourceRef:
     kind: GitRepository
@@ -47,7 +63,7 @@ metadata:
   namespace: tekton-pipelines
 spec:
   dependsOn:
-    - name: tekton-pipeline
+    - name: tekton-interceptor
   interval: 5m0s
   path: ./clusters/dev/tekton-pipelines/dashboard
   prune: true

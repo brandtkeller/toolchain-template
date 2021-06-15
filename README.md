@@ -19,7 +19,7 @@ I started this project using the Flux CLI but have since migrated away from need
 
 ## Toolchain
 - Gitea (Deployed)
-- Jenkins (Planning)
+- Tekton (Work In Progress)
 - Coder (Planning)
 
 ## TO-DO
