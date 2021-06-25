@@ -12,6 +12,8 @@ While it may be apparent from looking at my other repositories, a majority of my
 ## Limitations
 I started this project using the Flux CLI but have since migrated away from needing to use it and have worked towards creating all artifacts for the process from scratch. This is to add to my learning process but also make the repository portable without the need of the CLI.
 
+Once the repository has been instatiated on a git server, each `<project>-sync.yaml` in each directory needs to be created on the cluster with `kubectl create -f <project>-sync.yaml`.
+
 ## Tooling / Dependencies
 - Istio
 - Fluxv2
@@ -24,3 +26,8 @@ I started this project using the Flux CLI but have since migrated away from need
 
 ## TO-DO
 - Insert a diagram here to illustrate the iterations across multiple internal clusters and the namespaces therein. 
+
+## Notes
+- Create necessary trigger components for tekton triggers
+- Create ingress for the EventListener
+- Use the coder image repo as a test?
