@@ -43,6 +43,9 @@ data:
         builtIn:
           postgresql:
             enabled: true
+    memcached:
+      service:
+        port: 11211
     # additional volumes to add to the Gitea statefulset.
     extraVolumes:
     - name: root-ca
