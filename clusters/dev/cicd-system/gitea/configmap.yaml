@@ -39,6 +39,8 @@ data:
         APP_NAME: "Gitea: Keller Home Development Git"
         server:
           ROOT_URL: https://git-dev.rke2.home.local
+        cache:
+          HOST: cicd-system-gitea-system-memcached.cicd-system.svc.cluster.loca;:11211
       database:
         builtIn:
           postgresql:
