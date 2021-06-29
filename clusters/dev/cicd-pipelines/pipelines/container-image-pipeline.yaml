@@ -1,0 +1,26 @@
+---
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: container-build-pipeline
+  namespace: cicd-pipelines
+spec:
+  resources:
+    - name: source-repo
+      type: git
+    - name: image-source
+      type: image
+  tasks:
+    - name: build-container-image
+      taskRef:
+        name: build-container-image
+      params:
+        - name: pathToContext
+          value: ./
+      resources:
+        inputs:
+          - name: source-repo
+            resource: source-repo
+        outputs:
+          - name: builtImage
+            resource: image-source

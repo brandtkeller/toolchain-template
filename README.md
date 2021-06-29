@@ -29,5 +29,6 @@ Once the repository has been instatiated on a git server, each `<project>-sync.y
 
 ## Notes
 - Create necessary trigger components for tekton triggers
-- Create ingress for the EventListener
+- Create ingress for the EventListener OR just route webhooks from within the cluster
 - Use the coder image repo as a test?
+- Modify Gitea to use `git-dev.rke2.home.local` FQDN

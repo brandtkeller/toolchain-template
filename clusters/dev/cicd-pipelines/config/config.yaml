@@ -1,0 +1,75 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: getting-started-triggertemplate
+  namespace: cicd-pipelines
+spec:
+  params:
+    - name: gitrevision
+      description: The git revision
+      default: main
+    - name: gitrepositoryurl
+      description: The git repository url
+    - name: namespace
+      description: The namespace to create the resources
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: getting-started-pipeline-run-
+        namespace: $(tt.params.namespace)
+      spec:
+        serviceAccountName: tekton-triggers-sa
+        pipelineRef:
+          name: getting-started-pipeline
+        resources:
+          - name: source-repo
+            resourceSpec:
+              type: git
+              params:
+              - name: revision
+                value: $(tt.params.gitrevision)
+              - name: url
+                value: $(tt.params.gitrepositoryurl)
+          - name: image-source
+            resourceSpec:
+              type: image
+              params:
+                - name: url
+                  value: DOCKERREPO-REPLACEME # docker-repo-location.com/repo:getting-started
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: getting-started-pipelinebinding
+  namespace: cicd-pipelines
+spec:
+  params:
+    - name: gitrevision
+      value: $(body.head_commit.id)
+    - name: namespace
+      value: cicd-pipelines
+    - name: gitrepositoryurl
+      value: "http://cicd-system-gitea-cicd-system-http.cicd-system.svc:3000/$(body.repository.full_name)"
+    - name: gitreponame
+      value: $(body.repository.full_name)
+---
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: tekton-listener
+  namespace: cicd-pipelines
+spec:
+  serviceAccountName: tekton-triggers-sa
+  triggers:
+    - name: triggers-cd
+      interceptors:
+        - cel:
+            filter: >-
+              (header.match('X-GitHub-Event', 'push') &&
+               body.repository.full_name == 'tekton/triggers') &&
+               body.ref.startsWith('refs/heads/master')
+      bindings:
+        - name: triggers-cd-binding
+      template:
+        name: triggers-cd-template
