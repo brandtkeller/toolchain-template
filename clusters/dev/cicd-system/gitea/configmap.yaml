@@ -10,6 +10,7 @@ data:
       annotations:
         kubernetes.io/ingress.class: nginx
         cert-manager.io/cluster-issuer: cluster-ca-issuer
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
       hosts:
         - git-dev.rke2.home.local
       tls:
