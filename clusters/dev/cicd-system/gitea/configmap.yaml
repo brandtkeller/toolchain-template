@@ -40,7 +40,7 @@ data:
         server:
           ROOT_URL: https://git-dev.rke2.home.local
         cache:
-          HOST: cicd-system-gitea-system-memcached.cicd-system.svc.cluster.loca;:11211
+          HOST: cicd-system-gitea-system-memcached.cicd-system.svc.cluster.local:11211
       database:
         builtIn:
           postgresql:
