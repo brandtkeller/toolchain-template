@@ -43,6 +43,9 @@ data:
         builtIn:
           postgresql:
             enabled: true
+      cache:
+        builtIn:
+          enabled: true
     memcached:
       service:
         port: 11211
