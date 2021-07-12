@@ -24,10 +24,12 @@ Once the repository has been instatiated on a git server, each `<project>-sync.y
 - Tekton (Work In Progress)
 - Coder (Planning)
 
-## TO-DO
+## Repo TO-DO
 - Insert a diagram here to illustrate the iterations across multiple internal clusters and the namespaces therein. 
 
-## Notes
+## Logic TO-DO
+- Create cert-manager resources
+- Migrate gitea to a `cicd` namespace instead of `cicd-system`
 - Create necessary trigger components for tekton triggers
 - Create ingress for the EventListener OR just route webhooks from within the cluster
 - Use the coder image repo as a test?
