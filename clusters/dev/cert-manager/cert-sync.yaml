@@ -30,7 +30,3 @@ spec:
     name: flux-system
     namespace: flux-system
   validation: client
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-gpg 
