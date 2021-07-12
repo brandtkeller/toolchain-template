@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: gitea-cm
-  namespace: cicd-system
+  namespace: cicd
 data:
   values.yaml: |
     ingress:
