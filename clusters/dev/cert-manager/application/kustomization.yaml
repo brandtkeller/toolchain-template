@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
 - helm-repository.yaml
 - helm-release.yaml
+- root_ca_data.yaml
+- cluster_issue.yaml
