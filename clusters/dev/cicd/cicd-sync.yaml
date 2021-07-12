@@ -2,21 +2,18 @@
 apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
 kind: Kustomization
 metadata:
-  name: cicd-system
-  namespace: cicd-system
+  name: cicd
+  namespace: cicd
 spec:
   interval: 5m0s
-  path: ./clusters/dev/cicd-system
+  path: ./clusters/dev/cicd
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
   validation: client
-   # Enable decryption
   decryption:
-    # Use the sops provider
     provider: sops
     secretRef:
-      # Reference the new 'sops-gpg' secret
       name: sops-gpg

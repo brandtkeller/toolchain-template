@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: git-entry
-  namespace: cicd-system
+  namespace: cicd
 data:
   entrypoint: |
     #!/bin/sh

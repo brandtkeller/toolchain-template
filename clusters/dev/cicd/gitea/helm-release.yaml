@@ -2,8 +2,8 @@
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
-  name: gitea-system
-  namespace: cicd-system
+  name: gitea
+  namespace: cicd
 spec:
   chart:
     spec:
@@ -13,7 +13,7 @@ spec:
         kind: HelmRepository
         name: gitea-charts
   interval: 30s
-  targetNamespace: cicd-system
+  targetNamespace: cicd
   valuesFrom:
   - kind: ConfigMap
     name: gitea-cm
