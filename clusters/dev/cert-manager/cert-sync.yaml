@@ -23,10 +23,14 @@ spec:
   dependsOn:
     - name: cert-manager-setup
   interval: 5m0s
-  path: ./clusters/dev/cert-manager/application
+  path: ./clusters/dev/cert-manager
   prune: true
   sourceRef:
     kind: GitRepository
     name: flux-system
     namespace: flux-system
   validation: client
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-gpg 

@@ -6,8 +6,3 @@ resources:
 - helm-release.yaml
 - root_ca_data.yaml
 - cluster_issuer.yaml
-spec:
-  decryption:
-    provider: sops
-    secretRef:
-      name: sops-gpg 
