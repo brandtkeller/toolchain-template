@@ -12,11 +12,11 @@ data:
         cert-manager.io/cluster-issuer: ca-issuer
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
       hosts:
-        - git-cicd.rke2.home.local
+        - git.dev.home.local
       tls:
-      - secretName: git-dev-tls
+      - secretName: git-tls
         hosts:
-          - git-cicd.rke2.home.local
+          - git.dev.home.local
     resources:
       limits:
         cpu: 200m
@@ -38,7 +38,7 @@ data:
         ENABLE_PUSH_CREATE_ORG: true
         APP_NAME: "Gitea: Keller Home Development Git"
         server:
-          ROOT_URL: https://git-cicd.rke2.home.local
+          ROOT_URL: https://git.dev.home.local
         cache:
           HOST: cicd-gitea-memcached.cicd.svc.cluster.local:11211
       database:
