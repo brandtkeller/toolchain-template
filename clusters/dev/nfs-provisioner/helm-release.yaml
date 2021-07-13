@@ -20,3 +20,7 @@ spec:
       path: /k8s-volumes
     podSecurityPolicy:
       enabled: true
+    storageClass:  
+      defaultClass: true
+      reclaimPolicy: Retain
+      accessMode: ReadWriteMany
