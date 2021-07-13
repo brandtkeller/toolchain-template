@@ -1,0 +1,15 @@
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1beta1
+kind: Kustomization
+metadata:
+  name: nfs-prov
+  namespace: default
+spec:
+  interval: 5m0s
+  path: ./clusters/dev/nfs-provisioner
+  prune: true
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+    namespace: flux-system
+  validation: client
