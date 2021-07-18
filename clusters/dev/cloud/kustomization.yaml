@@ -1,0 +1,9 @@
+---
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- namespace.yaml
+- nextcloud/secret.yaml
+- nextcloud/configmap.yaml
+- nextcloud/helm-repository.yaml
+- nextcloud/helm-release.yaml
