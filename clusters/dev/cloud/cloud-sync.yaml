@@ -6,7 +6,7 @@ metadata:
   namespace: cloud
 spec:
   interval: 5m0s
-  path: ./clusters/dev/cload
+  path: ./clusters/dev/cloud
   prune: true
   sourceRef:
     kind: GitRepository
