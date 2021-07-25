@@ -7,7 +7,7 @@ data:
   values.yaml: |
     image:
       repository: nextcloud
-      tag: 21.0.3-apache
+      tag: 20.0-apache
     ingress:
       enabled: true
       annotations:
