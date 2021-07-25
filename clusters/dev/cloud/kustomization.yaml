@@ -7,3 +7,5 @@ resources:
 - nextcloud/configmap.yaml
 - nextcloud/helm-repository.yaml
 - nextcloud/helm-release.yaml
+- aws-s3-cron/secret.yaml
+- aws-s3-cron/cronjob.yaml

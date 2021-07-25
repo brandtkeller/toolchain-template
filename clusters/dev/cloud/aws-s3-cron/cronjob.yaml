@@ -1,0 +1,36 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  creationTimestamp: null
+  name: cloud-sync-cronjob
+  namespace: cloud
+spec:
+  # Each night at midnight for schedule
+  schedule: '0 0 * * *'
+  jobTemplate:
+    metadata:
+      name: cloud-sync-cronjob
+    spec:
+      template:
+        spec:
+          containers:
+          - name: s3-sync
+            image: amazon/aws-cli:2.2.22
+            command:
+            - /bin/sh
+            - -c
+            - aws s3 sync /data/data s3://keller-home-dev/nextcloud
+            volumeMounts:
+            - name: aws-creds
+              mountPath: "/root/.aws"
+              readOnly: true
+            - name: data
+              mountPath: "/data"
+          volumes:
+          - name: aws-creds
+            secret:
+              secretName: aws-sec
+          - name: data
+            persistentVolumeClaim:
+              claimName: cloud-nextcloud-nextcloud
+          restartPolicy: OnFailure
