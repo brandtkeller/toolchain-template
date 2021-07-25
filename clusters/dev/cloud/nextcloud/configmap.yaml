@@ -5,6 +5,9 @@ metadata:
   namespace: cloud
 data:
   values.yaml: |
+    image:
+      repository: nextcloud
+      tag: 21.0.3
     ingress:
       enabled: true
       annotations:
