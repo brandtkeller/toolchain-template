@@ -11,6 +11,7 @@ spec:
     metadata:
       name: cloud-sync-cronjob
     spec:
+      activeDeadlineSeconds: 28800
       template:
         spec:
           containers:
@@ -33,4 +34,4 @@ spec:
           - name: data
             persistentVolumeClaim:
               claimName: cloud-nextcloud-nextcloud
-          restartPolicy: OnFailure
+          restartPolicy: Never
