@@ -6,7 +6,7 @@ metadata:
   namespace: cloud
 spec:
   # Each night at midnight for schedule
-  schedule: '0 0 * * *'
+  schedule: '0 7 * * *'
   jobTemplate:
     metadata:
       name: cloud-sync-cronjob
