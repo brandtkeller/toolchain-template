@@ -7,6 +7,8 @@ metadata:
 spec:
   # Each night at midnight for schedule
   schedule: '0 5 * * *'
+  successfulJobsHistoryLimit: 1
+  failedJobsHistoryLimit: 7
   jobTemplate:
     metadata:
       name: cloud-sync-cronjob
