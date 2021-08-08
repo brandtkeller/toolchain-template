@@ -9,3 +9,7 @@ resources:
 - gitea/certificates.yaml
 - gitea/entrypoint.yaml
 - gitea/helm-release.yaml
+- code-server/helm-repository.yaml
+- code-server/secret.yaml
+- code-server/configmap.yaml
+- code-server/helm-release.yaml
