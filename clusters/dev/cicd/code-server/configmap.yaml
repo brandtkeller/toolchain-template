@@ -12,7 +12,11 @@ data:
         cert-manager.io/cluster-issuer: ca-issuer
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
       hosts:
-        - code.dev.home.local
+        - host: "code.dev.home.local"
+          paths:
+          - path: /
+            # Ignored if not kubeVersion >= 1.14-0
+            pathType: Prefix
       tls:
       - secretName: git-tls
         hosts:
