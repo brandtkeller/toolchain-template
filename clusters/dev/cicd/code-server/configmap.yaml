@@ -18,7 +18,7 @@ data:
             # Ignored if not kubeVersion >= 1.14-0
             pathType: Prefix
       tls:
-      - secretName: git-tls
+      - secretName: code-tls
         hosts:
           - code.dev.home.local
     persistence:
