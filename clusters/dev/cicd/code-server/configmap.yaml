@@ -43,6 +43,7 @@ data:
             backend:
               service:
                 port:
+                  name: cicd-code-code-server
                   number: 3000
       tls:
       - secretName: code-tls
