@@ -7,7 +7,7 @@ data:
   values.yaml: |
     image:
       repository: registry.home.local/code-server
-      pullPolicy: IfNotPresent
+      pullPolicy: Always
       tag: "version-v3.11.0-dev"
     service:
       additionalServices:
