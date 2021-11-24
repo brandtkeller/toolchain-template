@@ -10,22 +10,10 @@ data:
       pullPolicy: Always
       tag: "version-v3.11.0-dev"
     service:
-      additionalServices:
-      - enabled: true
-        nameSuffix: react
-        type: ClusterIP
-        # Specify the default port information
-        port:
-          port: 3000
-          # name defaults to http
-          name: http-react
-          protocol: TCP
-          # targetPort defaults to http
-          targetPort: 3000
-          # nodePort:
-        additionalPorts: []
-        annotations: {}
-        labels: {}
+      additionalPorts:
+          - name: "http-react"
+            port: 3000
+            protocol: TCP
     ingress:
       enabled: true
       annotations:
@@ -56,6 +44,11 @@ data:
               - path: /react
                 # Ignored if not kubeVersion >= 1.14-0
                 pathType: Prefix
+                backend:
+                  service:
+                    name: http-react
+                    port:
+                      number: 3000
         tls:
         - secretName: code-tls
           hosts:
