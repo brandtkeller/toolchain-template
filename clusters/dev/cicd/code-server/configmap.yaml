@@ -5,11 +5,27 @@ metadata:
   namespace: cicd
 data:
   values.yaml: |
+    image:
+      repository: registry.home.local/code-server
+      pullPolicy: IfNotPresent
+      tag: "version-v3.11.0-dev"
     service:
-      additionalPorts:
-        - name: "http-react"
-          port: 3000
+      additionalServices:
+      - enabled: true
+        nameSuffix: react
+        type: ClusterIP
+        # Specify the default port information
+        port:
+          port:
+          # name defaults to http
+          name: http-react
           protocol: TCP
+          # targetPort defaults to http
+          targetPort: 3000
+          # nodePort:
+        additionalPorts: []
+        annotations: {}
+        labels: {}
     ingress:
       enabled: true
       annotations:
