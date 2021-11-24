@@ -38,6 +38,11 @@ data:
           - path: /
             # Ignored if not kubeVersion >= 1.14-0
             pathType: Prefix
+            backend:
+              service:
+                port:
+                  name: cicd-code-code-server
+                  number: 8443
           - path: /react
             pathType: Prefix
             backend:
