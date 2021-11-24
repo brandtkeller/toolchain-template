@@ -26,32 +26,38 @@ data:
           - path: /
             # Ignored if not kubeVersion >= 1.14-0
             pathType: Prefix
+          - path: /react
+            pathType: Prefix
+            backend:
+              service:
+                port:
+                  number: 3000
       tls:
       - secretName: code-tls
         hosts:
           - code.dev.home.local
-      additionalIngresses:
-      - enabled: true
-        nameSuffix: "react"
-        annotations:
-          kubernetes.io/ingress.class: nginx
-          cert-manager.io/cluster-issuer: ca-issuer
-          nginx.ingress.kubernetes.io/proxy-body-size: "0"
-        labels: {}
-        hosts:
-          - host: code.dev.home.local
-            paths:
-              - path: /react
-                # Ignored if not kubeVersion >= 1.14-0
-                pathType: Prefix
-                backend:
-                  service:
-                    port:
-                      number: 3000
-        tls:
-        - secretName: code-tls
-          hosts:
-            - code.dev.home.local   
+      # additionalIngresses:
+      # - enabled: true
+      #   nameSuffix: "react"
+      #   annotations:
+      #     kubernetes.io/ingress.class: nginx
+      #     cert-manager.io/cluster-issuer: ca-issuer
+      #     nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      #   labels: {}
+      #   hosts:
+      #     - host: code.dev.home.local
+      #       paths:
+      #         - path: /react
+      #           # Ignored if not kubeVersion >= 1.14-0
+      #           pathType: Prefix
+      #           backend:
+      #             service:
+      #               port:
+      #                 number: 3000
+      #   tls:
+      #   - secretName: code-tls
+      #     hosts:
+      #       - code.dev.home.local   
     persistence:
       config:
         enabled: true
