@@ -10,10 +10,22 @@ data:
       pullPolicy: Always
       tag: "version-v3.11.0-dev"
     service:
-      additionalPorts:
-          - name: "http-react"
-            port: 3000
-            protocol: TCP
+      additionalServices:
+      - enabled: true
+        nameSuffix: react
+        type: ClusterIP
+        # Specify the default port information
+        port:
+          port: 3000
+          # name defaults to http
+          name: http-react
+          protocol: TCP
+          # targetPort defaults to http
+          targetPort: 3000
+          # nodePort:
+        additionalPorts: []
+        annotations: {}
+        labels: {}
     ingress:
       enabled: true
       annotations:
