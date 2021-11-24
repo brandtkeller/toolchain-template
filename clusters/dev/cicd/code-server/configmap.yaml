@@ -5,6 +5,11 @@ metadata:
   namespace: cicd
 data:
   values.yaml: |
+    service:
+      additionalPorts:
+        - name: "http-react"
+          port: 3000
+          protocol: TCP
     ingress:
       enabled: true
       annotations:
@@ -12,7 +17,7 @@ data:
         cert-manager.io/cluster-issuer: ca-issuer
         nginx.ingress.kubernetes.io/proxy-body-size: "0"
       hosts:
-        - host: "code.dev.home.local"
+        - host: code.dev.home.local
           paths:
           - path: /
             # Ignored if not kubeVersion >= 1.14-0
@@ -21,6 +26,24 @@ data:
       - secretName: code-tls
         hosts:
           - code.dev.home.local
+      additionalIngresses:
+      - enabled: true
+        nameSuffix: "react"
+        annotations: {}
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: ca-issuer
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+        labels: {}
+        hosts:
+          - host: code.dev.home.local
+            paths:
+              - path: /react
+                # Ignored if not kubeVersion >= 1.14-0
+                pathType: Prefix
+        tls:
+        - secretName: code-tls
+          hosts:
+            - code.dev.home.local   
     persistence:
       config:
         enabled: true

@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gitea-cm
+  namespace: cicd
+data:
+  values.yaml: |
+    ingress:
+      enabled: true
+      annotations:
+        kubernetes.io/ingress.class: nginx
+        cert-manager.io/cluster-issuer: ca-issuer
+        nginx.ingress.kubernetes.io/proxy-body-size: "0"
+      hosts:
+        - git.dev.home.local
+      tls:
+      - secretName: git-tls
+        hosts:
+          - git.dev.home.local
+    resources:
+      limits:
+        cpu: 200m
+        memory: 512Mi
+      requests:
+        cpu: 100m
+        memory: 256Mi
+    persistence:
+      enabled: true
+      # existingClaim:
+      size: 10Gi
+      accessModes:
+        - ReadWriteOnce
+      labels: {}
+      annotations: {}
+    gitea:
+      config:
+        ALLOW_LOCALNETWORKS: true
+        ENABLE_PUSH_CREATE_ORG: true
+        APP_NAME: "Gitea: Keller Home Development Git"
+        server:
+          ROOT_URL: https://git.dev.home.local
+        cache:
+          HOST: cicd-gitea-memcached.cicd.svc.cluster.local:11211
+      database:
+        builtIn:
+          postgresql:
+            enabled: true
+      cache:
+        builtIn:
+          enabled: true
+    memcached:
+      service:
+        port: 11211
+    # additional volumes to add to the Gitea statefulset.
+    extraVolumes:
+    - name: root-ca
+      secret:
+        secretName: root-ca-cert
+    - name: entry
+      configMap:
+        name: git-entry
+        defaultMode: 0777
+    extraVolumeMounts:
+    - name: root-ca
+      readOnly: false
+      mountPath: "/usr/local/share/ca-certificates"
+    - name: entry
+      mountPath: /usr/bin/entrypoint
+      subPath: entrypoint
+  
