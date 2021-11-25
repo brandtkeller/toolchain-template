@@ -15,6 +15,7 @@ metadata:
   #   helm.toolkit.fluxcd.io/name: code
   #   helm.toolkit.fluxcd.io/namespace: cicd
   name: cicd-code-code-server-dev
+  namespace: cicd
 spec:
   rules:
   - host: code.dev.home.local
