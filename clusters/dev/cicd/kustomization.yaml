@@ -13,3 +13,4 @@ resources:
 - code-server/secret.yaml
 - code-server/configmap.yaml
 - code-server/helm-release.yaml
+- code-server/dev-ingress.yaml

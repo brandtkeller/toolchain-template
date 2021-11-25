@@ -1,0 +1,33 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: ca-issuer
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+  # labels:
+  #   app.kubernetes.io/instance: cicd-code
+  #   app.kubernetes.io/managed-by: Helm
+  #   app.kubernetes.io/name: code-server
+  #   app.kubernetes.io/version: v3.11.0
+  #   helm.sh/chart: code-server-1.1.0
+  #   helm.toolkit.fluxcd.io/name: code
+  #   helm.toolkit.fluxcd.io/namespace: cicd
+  name: cicd-code-code-server-dev
+spec:
+  rules:
+  - host: code.dev.home.local
+    http:
+      paths:
+      - backend:
+          service:
+            name: cicd-code-code-server-react
+            port:
+              number: 3000
+        path: /react
+        pathType: Prefix
+  tls:
+  - hosts:
+    - code.dev.home.local
+    secretName: code-tls
