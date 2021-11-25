@@ -6,7 +6,7 @@ metadata:
     cert-manager.io/cluster-issuer: ca-issuer
     kubernetes.io/ingress.class: nginx
     nginx.ingress.kubernetes.io/proxy-body-size: "0"
-    nginx.ingress.kubernetes.io/rewrite-target: /react/$2
+    # nginx.ingress.kubernetes.io/rewrite-target: /react/$2
   # labels:
   #   app.kubernetes.io/instance: cicd-code
   #   app.kubernetes.io/managed-by: Helm
@@ -19,7 +19,7 @@ metadata:
   namespace: cicd
 spec:
   rules:
-  - host: code.dev.home.local
+  - host: react.dev.home.local
     http:
       paths:
       - backend:
@@ -27,9 +27,9 @@ spec:
             name: cicd-code-code-server-react
             port:
               number: 3000
-        path: /react(/|$)(.*)
+        path: /
         pathType: Prefix
   tls:
   - hosts:
-    - code.dev.home.local
-    secretName: code-tls
+    - react.dev.home.local
+    secretName: react-tls
